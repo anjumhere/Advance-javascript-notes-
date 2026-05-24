@@ -28,6 +28,7 @@ const userManager = {
     let username = inputValue.value; // Get username from input
     let password = passWd.value; // Get password from input
     this.addUser(username, password); // Pass to addUser method
+    this.renderUserDetails();
   },
 
   // Add user to the array
@@ -39,9 +40,10 @@ const userManager = {
       passWd: password, // Store password
     };
     this.users.push(user); // Add user object to array
-    console.log(this.users); // Display all users in console
   },
-
+  renderUserDetails: function () {
+    console.log(this.users);
+  },
   // Remove user (to be implemented)
   removeUser: function () {},
 };

@@ -5,8 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
+
+  <style>
+    html,
+    body {
+      height: 100vh;
+      width: 100vw;
+    }
+    body {
+      background-color: rgb(34, 34, 34);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    label {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input {
+      margin-bottom: 15px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    a {
+      margin-bottom: 15px;
+      color: #007bff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    button {
+      padding: 10px;
+      border: none;
+      border-radius: 3px;
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
   <body>
-    <h1 id="h1">Alert</h1>
-    <script type="module" src="call-apply-bind.js"></script>
+    <form id="loginForm">
+      <label for="username">Username:</label>
+      <input type="text" id="inputValue" name="username" required />
+      <br />
+      <label for="password">Password:</label>
+      <input type="password" id="inputPswd" name="password" required />
+      <br />
+      <a href="#">Forgot Password?</a>
+      <br />
+      <button type="submit" id="submit-button">Submit</button>
+    </form>
+
+    <script type="module" src="index.js"></script>
   </body>
 </html>

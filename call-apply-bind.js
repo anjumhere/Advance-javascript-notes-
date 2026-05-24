@@ -1,7 +1,23 @@
 /*
 1. call() METHOD
 Definition:
-call() is a built-in JavaScript method that allows you to invoke a function with a specific this value and pass arguments individually. It executes the function immediately.
+call() is a built-in JavaScript method that allows you to invoke a function with a specific this value and pass arconst form = document.querySelector("form");
+
+const userManager = {
+  users: [],
+  init: function () {
+    form.addEventListener("submit", this.submitForm.bind(this));
+  },
+  submitForm: function (e) {
+    e.preventDefault();
+    console.log(this);
+  },
+  addUser: function () {},
+  removeUser: function () {},
+};
+
+userManager.init();
+guments individually. It executes the function immediately.
 */
 
 // example - syntax

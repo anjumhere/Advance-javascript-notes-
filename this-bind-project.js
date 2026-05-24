@@ -9,8 +9,10 @@
  */
 
 const form = document.querySelector("form");
-const inputValue = document.getElementById("inputValue");
-const passWd = document.getElementById("inputPswd");
+const inputUsername = document.getElementById("inputUsername");
+const inputAge = document.getElementById("inputAge");
+const inputProfession = document.getElementById("inputProfession");
+const inputPhotoUrl = document.getElementById("inputPhotoUrl");
 
 const userManager = {
   users: [], // Array to store user objects
@@ -25,24 +27,56 @@ const userManager = {
   // Handle form submission
   submitForm: function (e) {
     e.preventDefault(); // Prevent page reload
-    let username = inputValue.value; // Get username from input
-    let password = passWd.value; // Get password from input
-    this.addUser(username, password); // Pass to addUser method
-    this.renderUserDetails();
+    let username = inputUsername; // Get username from input
+    let age = inputAge;
+    let profession = inputProfession;
+    let photoUrl = inputPhotoUrl;
+    this.addUser(username, age, profession, photoUrl); // Pass to addUser method
   },
 
   // Add user to the array
-  addUser: function (username, password) {
+  addUser: function (username, age, profession, photoUrl) {
     // Create user object with unique ID
     const user = {
       Id: this.nextId++, // Assign ID (1, 2, 3, ...) and increment
-      userName: username, // Store username
-      passWd: password, // Store password
+      userName: username.value, // Store username
+      age: age.value,
+      profession: profession.value,
+      photo: photoUrl.value,
     };
-    this.users.push(user); // Add user object to array
-  },
-  renderUserDetails: function () {
+    this.users.push(user);
+    this.renderUI(user);
     console.log(this.users);
+  },
+  renderUI: function (user) {
+    const userCard = document.createElement("div");
+    userCard.className = "user-card";
+
+    // Create the image element
+    const img = document.createElement("img");
+    img.src = user.photo;
+    img.alt = "User Avatar";
+
+    // Create the username heading
+    const nameHeading = document.createElement("h3");
+    nameHeading.textContent = user.userName;
+
+    // Create the profession paragraph
+    const professionPara = document.createElement("p");
+    professionPara.textContent = user.profession;
+
+    // Create the age badge
+    const ageBadge = document.createElement("div");
+    ageBadge.className = "age";
+    ageBadge.textContent = `Age: ${user.age}`;
+
+    // Append all elements to the card
+    userCard.appendChild(img);
+    userCard.appendChild(nameHeading);
+    userCard.appendChild(professionPara);
+    userCard.appendChild(ageBadge);
+
+    cardContainer.appendChild(userCard);
   },
   // Remove user (to be implemented)
   removeUser: function () {},

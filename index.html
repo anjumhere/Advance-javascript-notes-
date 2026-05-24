@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>User Manager - Form & Cards</title>
   </head>
 
   <style>
@@ -11,41 +11,53 @@
     body {
       height: 100vh;
       width: 100vw;
+      margin: 0;
+      padding: 0;
     }
     body {
       background-color: rgb(34, 34, 34);
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
+      gap: 40px;
+      padding: 20px;
     }
+
+    .container {
+      display: flex;
+      gap: 60px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Form Styles */
     form {
       display: flex;
       flex-direction: column;
       width: 300px;
-      margin: 0 auto;
       padding: 20px;
       border: 1px solid #ccc;
       border-radius: 5px;
       background-color: #f9f9f9;
     }
+
     label {
       margin-bottom: 5px;
       font-weight: bold;
+      color: #333;
+      font-size: 14px;
     }
+
     input {
       margin-bottom: 15px;
       padding: 8px;
       border: 1px solid #ccc;
       border-radius: 3px;
+      font-size: 14px;
     }
-    a {
-      margin-bottom: 15px;
-      color: #007bff;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
+
     button {
       padding: 10px;
       border: none;
@@ -54,23 +66,127 @@
       color: white;
       font-size: 16px;
       cursor: pointer;
+      font-weight: bold;
     }
+
     button:hover {
       background-color: #0056b3;
     }
+
+    /* User Card Styles */
+    .card-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .user-card {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding: 25px;
+      width: 250px;
+      text-align: center;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .user-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .user-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 3px solid #007bff;
+    }
+
+    .user-card h3 {
+      margin: 10px 0 5px 0;
+      color: #333;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .user-card p {
+      margin: 5px 0;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .age {
+      background-color: #007bff;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      display: inline-block;
+      font-size: 12px;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    .title {
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
   </style>
+
   <body>
-    <form id="loginForm">
-      <label for="username">Username:</label>
-      <input type="text" id="inputValue" name="username" required />
-      <br />
-      <label for="password">Password:</label>
-      <input type="password" id="inputPswd" name="password" required />
-      <br />
-      <a href="#">Forgot Password?</a>
-      <br />
-      <button type="submit" id="submit-button">Submit</button>
-    </form>
+    <div class="title">User Manager</div>
+
+    <div class="container">
+      <!-- Form Section -->
+      <form id="loginForm">
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          id="inputUsername"
+          name="username"
+          placeholder="Enter username"
+          required
+        />
+
+        <label for="age">Age:</label>
+        <input
+          type="number"
+          id="inputAge"
+          name="age"
+          placeholder="Enter age"
+          required
+        />
+
+        <label for="profession">Profession:</label>
+        <input
+          type="text"
+          id="inputProfession"
+          name="profession"
+          placeholder="Enter profession"
+          required
+        />
+
+        <label for="photoUrl">Photo URL:</label>
+        <input
+          type="url"
+          id="inputPhotoUrl"
+          name="photoUrl"
+          placeholder="Enter photo URL"
+          required
+        />
+
+        <button type="submit" id="submit-button">Submit</button>
+      </form>
+
+      <!-- Cards Section -->
+      <div class="card-container" id="cardContainer"></div>
+    </div>
 
     <script type="module" src="this-bind-project.js"></script>
   </body>

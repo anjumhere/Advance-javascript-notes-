@@ -28,16 +28,16 @@ getProfile("anjum", function (userData) {
     savedPosts(userData._id, function (savedposts) {
       console.log(savedposts);
     });
-  });
-});
-*/
+    });
+    });
+    */
 
 let pr = new Promise((res, rej) => {
   let rn = Math.floor(Math.random() * 10);
   setTimeout(() => {
     if (rn < 5) res(rn);
     else rej(rn);
-  }, 2000);
+  }, 1000);
 });
 
 pr.then((val) => {
@@ -45,3 +45,39 @@ pr.then((val) => {
 }).catch((val) => {
   console.error(`CONNECTION FAILED!!! ERROR CODE : ${val}`);
 });
+
+let asynAwait = async () => {
+  try {
+    let val = await pr;
+    console.log(val);
+  } catch (err) {
+    console.log(err);
+  }
+};
+asynAwait();
+
+// Real example of handling api with promsie
+/*
+  let pr = new Promise((res, rej) => {
+    fetch("https://jsonplaceholder.typicode.com/users/1")
+      .then((response) => response.json())
+      .then((data) => res(data))
+      .catch((error) => rej(error));
+  });
+*/
+
+// Real example of handling api with async await
+/*
+let fetchUser = async () => {
+  try {
+    let response = await fetch("https://jsonplaceholder.typicode.com/users/1");
+    const user = await response.json();
+    console.log(user.phone);
+  } catch (error) {
+    console.log(`CONNECTION FAILED : ${error}`);
+  }
+};
+fetchUser();
+
+ 
+*/

@@ -3,110 +3,276 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Manager - Form & Cards</title>
+    <title>User Directory — Sleek Edition</title>
+    <style>
+      /* ---------- RESET & GLOBAL : PROFESSIONAL CANVAS ---------- */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: radial-gradient(circle at 20% 30%, #0a0f1f, #03060c);
+        font-family:
+          "Inter",
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          "Helvetica Neue",
+          sans-serif;
+        min-height: 100vh;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        padding: 1.5rem;
+      }
+
+      /* Main container — clean, centered, breathable */
+      .container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        width: 100%;
+        max-width: 480px;
+        margin-bottom: 2rem;
+      }
+
+      /* ---------- MODERN CARD: BLUISH BACKGROUND, DP LEFT, DETAILS RIGHT ---------- */
+      .user-card {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        background: #0f1a2f; /* deep bluish base — elegant & minimal */
+        border-radius: 1.5rem;
+        padding: 0.875rem 1.25rem;
+        transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+        border: 1px solid rgba(56, 128, 255, 0.2);
+        box-shadow:
+          0 8px 18px -6px rgba(0, 0, 0, 0.4),
+          inset 0 1px 0 rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(0px);
+      }
+
+      /* subtle lift on hover — sleek & interactive */
+      .user-card:hover {
+        background: #12243f;
+        border-color: rgba(74, 144, 255, 0.45);
+        transform: translateY(-2px);
+        box-shadow: 0 18px 28px -12px rgba(0, 0, 0, 0.5);
+      }
+
+      /* ---------- AVATAR (LEFT) : crisp, professional circular DP ---------- */
+      .user-card img {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+        background: #0a1222;
+        border: 2px solid #2b5588;
+        box-shadow: 0 6px 12px -6px rgba(0, 0, 0, 0.5);
+        transition:
+          border 0.2s,
+          transform 0.15s;
+      }
+
+      .user-card:hover img {
+        border-color: #5e9eff;
+        transform: scale(1.01);
+      }
+
+      /* ---------- DETAILS BLOCK (RIGHT): clean typography, inline meta ---------- */
+      .card-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        gap: 0.3rem;
+      }
+
+      /* name row : professional weight + optional age tag */
+      .user-card h3 {
+        color: #f0f4fe;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: -0.2px;
+        line-height: 1.3;
+        display: inline-flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 0.5rem;
+      }
+      .age {
+        color: white;
+      }
+      /* inline age badge — subtle, matches bluish scheme */
+      .user-age-badge {
+        font-size: 0.7rem;
+        font-weight: 500;
+        background: #1b3557;
+        padding: 0.15rem 0.6rem;
+        border-radius: 30px;
+        color: white;
+        letter-spacing: 0;
+        line-height: 1.4;
+        white-space: nowrap;
+      }
+
+      /* meta line: city + email indicator — sleek inline */
+      .user-card p {
+        color: #9cb2df;
+        font-size: 0.75rem;
+        margin-top: 0px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        row-gap: 0.25rem;
+      }
+
+      /* city styling with subtle icon (bluish minimalist) */
+      .city-text {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.75rem;
+        font-weight: 450;
+      }
+
+      .city-text::before {
+        content: "📍";
+        font-size: 0.7rem;
+        filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.3));
+        opacity: 0.85;
+      }
+
+      /* email chip – blends into bluish theme, clean */
+      .email-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        background: rgba(43, 85, 136, 0.3);
+        padding: 0.2rem 0.65rem;
+        border-radius: 40px;
+        font-size: 0.7rem;
+        font-family: "SF Mono", "Menlo", monospace;
+        color: #cadeff;
+        letter-spacing: 0.2px;
+        backdrop-filter: blur(2px);
+      }
+
+      .email-chip::before {
+        content: "✉️";
+        font-size: 0.65rem;
+        opacity: 0.9;
+      }
+
+      /* optional subtle action inside card (fully preserve existing js) */
+      /* we keep .btn style but match the new sleek language — yet retain class for your js */
+      .btn {
+        padding: 0.5rem 1.25rem;
+        border-radius: 2rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        background: #1e3255;
+        color: #eef3ff;
+        border: 1px solid rgba(80, 140, 220, 0.4);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        letter-spacing: 0.2px;
+        backdrop-filter: blur(2px);
+      }
+
+      .btn:hover {
+        background: #2b4680;
+        border-color: #5e92e0;
+        transform: scale(0.98);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      /* ---------- REFRESH BUTTON (SLEEK, MATCHES BLUISH THEME) ---------- */
+      .refresh-btn {
+        padding: 0.7rem 2rem;
+        border-radius: 3rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        background: #10233f;
+        color: #f0f5ff;
+        border: 1px solid rgba(72, 138, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(4px);
+        letter-spacing: 0.3px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .refresh-btn:hover {
+        background: #1a3a62;
+        border-color: #6f9eff;
+        transform: scale(0.98);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+      }
+
+      .refresh-btn:active {
+        transform: scale(0.96);
+      }
+
+      /* preserve any loading/empty states from existing js — but style them to fit */
+      /* (just in case your js injects loading messages, we style them consistently) */
+      .container div:only-child:not(.user-card) {
+        text-align: center;
+        color: #b9ceff;
+        background: #0f1a2faa;
+        border-radius: 2rem;
+        padding: 1.5rem;
+        backdrop-filter: blur(4px);
+        font-size: 0.85rem;
+      }
+
+      /* subtle scroll if many cards, but keeps professional boundaries */
+      .container {
+        max-height: 75vh;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #2a4880 #0e172b;
+        padding-right: 0.25rem;
+      }
+
+      .container::-webkit-scrollbar {
+        width: 4px;
+      }
+      .container::-webkit-scrollbar-track {
+        background: #0e172b;
+        border-radius: 10px;
+      }
+      .container::-webkit-scrollbar-thumb {
+        background: #2f5488;
+        border-radius: 10px;
+      }
+
+      /* additional micro spacing for better readability */
+      .user-card h3 + .user-card p {
+        margin-top: 2px;
+      }
+
+      /* to keep existing js dynamic content clean, we don't override button structure */
+      /* all existing class names remain untouched, but appearance upgraded */
+      /* ensures your js (refresh, user loading) keeps working perfectly */
+    </style>
   </head>
-  <style>
-    html,
-    body {
-      height: 100vh;
-      width: 100vw;
-    }
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      background-color: #0b132b;
-    }
-
-    .container {
-      display: flex;
-      padding: 10px;
-      gap: 15px;
-      height: 300px;
-      width: 70vw;
-      overflow: hidden;
-      justify-content: center;
-      align-items: center;
-    }
-    .user-card {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      padding: 25px;
-      width: auto;
-      text-align: center;
-      transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-
-    .user-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-    }
-
-    .user-card img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 15px;
-      border: 3px solid #007bff;
-    }
-
-    .user-card h3 {
-      margin: 10px 0 5px 0;
-      color: #333;
-      font-size: 15px;
-      font-weight: bold;
-    }
-
-    .user-card p {
-      margin: 5px 0;
-      color: #666;
-      font-size: 14px;
-    }
-
-    .age {
-      background-color: #007bff;
-      color: white;
-      padding: 6px 12px;
-      border-radius: 20px;
-      display: inline-block;
-      font-size: 12px;
-      margin-top: 12px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .btn {  .container
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10px 30px;
-      position: absolute;
-      top: 80%;
-      border-radius: 10px;
-      font-weight: 600;
-      background-color: crimson;
-      color: white;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      transition: transform ease-in-out 300ms;
-    }
-    .btn:hover {
-      transform: translateY(-5px);
-      background-color: rgb(196, 37, 69);
-    }
-  </style>
   <body>
     <div class="container"></div>
-    <button class="btn">Refresh</button>
+    <button class="btn refresh-btn">Refresh</button>
+    <!-- Your existing JavaScript remains completely untouched -->
     <script src="build.js"></script>
   </body>
 </html>

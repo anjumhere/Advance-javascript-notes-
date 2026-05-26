@@ -1,21 +1,47 @@
-function getProfile(user, fn) {
+// Callback hell
+
+/*
+function getProfile(username, fn) {
   console.log("Fetching userData....");
-
   setTimeout(() => {
-    fn({ _id: 12321, user });
+    fn({ _id: 12323423, username });
   }, 2000);
 }
 
-function getPosts(id, fn) {
-  console.log("Fetching posts");
-
+function getPosts(id, cb) {
+  console.log("Fetching user posts....");
   setTimeout(() => {
-    fn({ _id: id, posts: ["hey", "this", "is", "posts"] });
+    cb({ _id: id, posts: ["instagram posts 1"] });
   }, 2000);
 }
-getProfile("anjum", function (data) {
-  console.log(data);
-  getPosts(data._id, function (posts) {
+function savedPosts(id, cb) {
+  console.log("Fetching all saved posts....");
+  setTimeout(() => {
+    cb({ _id: id, savedposts: ["gigit", "k2", "ghizer", "phander"] });
+  }, 3000);
+}
+
+getProfile("anjum", function (userData) {
+  console.log(userData);
+  getPosts(userData._id, function (posts) {
     console.log(posts);
+    savedPosts(userData._id, function (savedposts) {
+      console.log(savedposts);
+    });
   });
+});
+*/
+
+let pr = new Promise((res, rej) => {
+  let rn = Math.floor(Math.random() * 10);
+  setTimeout(() => {
+    if (rn < 5) res(rn);
+    else rej(rn);
+  }, 2000);
+});
+
+pr.then((val) => {
+  console.log(`Data received: ${val}`);
+}).catch((val) => {
+  console.error(`CONNECTION FAILED!!! ERROR CODE : ${val}`);
 });
